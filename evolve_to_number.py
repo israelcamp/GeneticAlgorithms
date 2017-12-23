@@ -25,7 +25,7 @@ class Item():
 '''Given two items from pop returns a baby'''
 def make_child(goal, father, mother):
     #make baby using the sum of the values from mather and father plus a minor mutation
-    baby = Item(goal, father.value + mother.value + .1*np.random.rand())
+    baby = Item(goal, father.value + mother.value + .01*np.random.rand())
     return baby
 
 '''Given a population returns its children'''
