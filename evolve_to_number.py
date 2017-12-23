@@ -1,6 +1,17 @@
 import numpy as np 
 from random import shuffle
-
+'''
+    Very basic code using genetic algorithm.
+    Given goal number a population starts with random values between 0 and 1
+    and evolve to the goal
+    
+    I could change somethings:
+        - The way I put things into pool
+        - I could allow negative numbers
+        
+    The purpose of this code is just to get an idea of how genetic algorithms work.
+    Next I will try to implement on text.
+'''
 class Item():
     '''initiates the class object'''
     def __init__(self, goal, value):
@@ -13,6 +24,7 @@ class Item():
 
 '''Given two items from pop returns a baby'''
 def make_child(goal, father, mother):
+    #make baby using the sum of the values from mather and father plus a minor mutation
     baby = Item(goal, father.value + mother.value + .1*np.random.rand())
     return baby
 
