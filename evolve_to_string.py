@@ -13,7 +13,7 @@ class DNA():
         for i in range(len(self.goal)):
             if self.value[i] == self.goal[i]:
                 fit += 1
-        return fit/(len(self.goal))
+        return (fit/(len(self.goal)))**2
     '''mutates'''
     def mutates(self):            
         for i in range(len(self.value)):
@@ -66,6 +66,7 @@ class Population():
             child.mutates()
             new_pop.append(child)
         return new_pop
+    '''evolve the populations towards the goal'''
     def evolve(self):
         count = 0
         pop = self.make_population()
