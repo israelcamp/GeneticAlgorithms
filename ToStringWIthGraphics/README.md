@@ -2,6 +2,6 @@ I just did the same with strings, but now I have a canvas that display the membe
 
 Next I will add some more thing to canvas.
 
-# Update
+# Update - 24.14.17
 
 Added with graphics using pyglet.
