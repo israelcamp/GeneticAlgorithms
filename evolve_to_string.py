@@ -21,7 +21,7 @@ class DNA():
                 self.value[i] = self.mutatesChar()
     '''return random char'''
     def mutatesChar(self, chars=string.ascii_letters+' '):
-        return ''.join(random.choice(chars))
+        return random.choice(chars)
 
 class Population():
     def __init__(self, goal, size_pop = 200, mutationRate = 0.01):
@@ -33,7 +33,7 @@ class Population():
     def strArr(self, string):
         return [char for char in string]
     '''generate a random string'''
-    def strGenerator(self, size, chars=string.ascii_lowercase+' '):
+    def strGenerator(self, size, chars=string.ascii_letters+' '):
         return [random.choice(chars) for _ in range(size)]
     '''Creates an element of the population, now its DNA'''
     def make_member(self):
@@ -77,6 +77,6 @@ class Population():
             print('Generation {}: {}'.format(count, ''.join(best_member.value)))
         return best_member
 
-goal = 'esporte na'
+goal = 'Natalia Goska'
 planet = Population(goal, 200, 0.01)
 best = planet.evolve()
