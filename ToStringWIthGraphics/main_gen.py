@@ -27,9 +27,9 @@ class God():
         if self.best_member.fitness() < 1:
             self.count_gen += 1
             self.pop, self.best_member = self.planet.one_step_evolve(self.pop)
-        self.msg_member.update_msg(''.join(self.best_member.value))
-        self.msg_fitness.update_msg(str(self.best_member.fitness()))
-        self.msg_gen.update_msg(str(self.count_gen))
+            self.msg_member.update_msg(''.join(self.best_member.value))
+            self.msg_fitness.update_msg(str(self.best_member.fitness()))
+            self.msg_gen.update_msg(str(self.count_gen))
 goal = 'Natalia Goska'
 g = God(goal, size_pop=200, mutationRate=0.01)
 
