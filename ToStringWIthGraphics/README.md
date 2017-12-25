@@ -5,3 +5,5 @@ Next I will add some more thing to canvas.
 # Update - 24.14.17
 
 Added with graphics using pyglet.
+
+Next I want to make this simpler.
