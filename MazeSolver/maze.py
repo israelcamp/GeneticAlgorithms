@@ -71,16 +71,19 @@ class Maze():
     '''updates current cell'''
     def updates_grid(self, dt): 
         next_cell, way = self.find_next_cell(self.current_cell)
-        if next_cell != None:
+        if next_cell is not None:
             self.current_cell.visited = True
             self.current_cell.current = False
             self.removeWalls(way, self.current_cell, next_cell)
             self.stack.append(self.current_cell)
             self.current_cell = next_cell
             self.current_cell.current = True
-        if next_cell == None and len(self.stack) > 0:
+        elif next_cell is None and len(self.stack) > 0:
             self.current_cell.visited = True
             self.current_cell.current = False
-            next_cell = choice(self.stack)
+            next_cell = self.stack[-1]
             self.stack.remove(next_cell)
-            self.current_cell = next_cell               
+            self.current_cell = next_cell 
+            self.current_cell.current = True
+        else:
+            self.current_cell.current = False             
