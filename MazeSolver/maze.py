@@ -15,14 +15,14 @@ class Maze():
     def addBeginEnd(self):
         self.current_cell = self.grid[0]
         self.grid[0].walls['bottom'] = False
-        self.grid[99].walls['right'] = False
+        self.grid[-1].walls['right'] = False
     '''print the maze'''
     def show(self):
         for cell in self.grid:
             cell.draw() 
     '''cheks if the neighbor was visited'''       
     def checkVisited(self, ng_index):
-        if not self.grid[ng_index].visited:
+        if not self.grid[ng_index].status['visited']:
             return self.grid[ng_index]
         else:
             return None
@@ -72,18 +72,17 @@ class Maze():
     def updates_grid(self, dt): 
         next_cell, way = self.find_next_cell(self.current_cell)
         if next_cell is not None:
-            self.current_cell.visited = True
-            self.current_cell.current = False
+            Cell.changeStatus(self.current_cell.status, 'visited', 'current', 'in_stack')
             self.removeWalls(way, self.current_cell, next_cell)
             self.stack.append(self.current_cell)
             self.current_cell = next_cell
-            self.current_cell.current = True
+            Cell.changeStatus(self.current_cell.status, 'current')
         elif next_cell is None and len(self.stack) > 0:
-            self.current_cell.visited = True
-            self.current_cell.current = False
+            Cell.changeStatus(self.current_cell.status, 'visited', 'current')
             next_cell = self.stack[-1]
             self.stack.remove(next_cell)
-            self.current_cell = next_cell 
-            self.current_cell.current = True
+            self.current_cell = next_cell
+            Cell.changeStatus(self.current_cell.status, 'in_stack', 'current')
         else:
-            self.current_cell.current = False             
+            #Cell.changeStatus(self.current_cell.status, 'current')
+            self.current_cell.status['current'] = False              
