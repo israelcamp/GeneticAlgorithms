@@ -13,14 +13,25 @@ class Cell():
         #here we define initial state of the walls
         self.walls = {'top':True, 'bottom': True, 'left': True, 'right': True}
         #keeps track if this cell was visited and if it is the current cell
-        self.visited, self.current = False, False
+        self.status = {'visited': False, 'current': False, 'in_stack': False}
+        self.visited, self.current, self.in_stack = False, False, False
+    @staticmethod
+    def changeStatus(obj, *args):
+        for key in args:
+            if key is not 'visited':
+                obj[key] = not obj[key]
+            elif key is 'visited' and obj[key] is False:
+                obj[key] = not obj[key]
     '''draws the cell'''
     def draw(self):
-        if self.visited:
-            vertex_list = shapes.square_list(self.x, self.y, self.size)
-            vertex_list.draw(pyglet.gl.GL_POLYGON)
-        if self.current:
+        if self.status['current']:
             vertex_list = shapes.square_list(self.x, self.y, self.size, color=(255, 0, 0))
+            vertex_list.draw(pyglet.gl.GL_POLYGON)
+        elif self.status['in_stack']:
+            vertex_list = shapes.square_list(self.x, self.y, self.size, color=(246, 93, 4))
+            vertex_list.draw(pyglet.gl.GL_POLYGON)    
+        elif self.status['visited']:
+            vertex_list = shapes.square_list(self.x, self.y, self.size)
             vertex_list.draw(pyglet.gl.GL_POLYGON)
         if self.walls['top']:
             pyglet.graphics.draw(2, pyglet.gl.GL_LINES,

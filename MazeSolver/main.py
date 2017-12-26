@@ -2,7 +2,7 @@ import pyglet
 from spot import Cell
 from maze import Maze
 
-width, height, size = 600, 600, 60
+width, height, size = 600, 600, 50
 rows, cols = width//size, height//size
 window = pyglet.window.Window(height=height+1, width=width+1)
 '''initiates our maze object'''
