@@ -2,8 +2,10 @@ import pyglet
 import shapes
 '''to work with 1D array'''
 class Cell():
-    def __init__(self, rowI, colJ, size):
+    def __init__(self, rowI, colJ, size, N):
         #saves the index at the array -- i know this is bad
+        self.index = rowI*N + colJ
+        self.N = N
         self.row, self.col = rowI, colJ
         #this saves the size of the square cell
         self.size = size

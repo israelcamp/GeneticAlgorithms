@@ -4,12 +4,13 @@ class Maze():
     def __init__(self, rows, cols, size):
         self.rows, self.cols, self.size = rows, cols, size
         self.stack = []
+        self.finished = False
     '''gives the initial state to maze'''
     def beginMaze(self):
         self.grid = []
         for i in range(self.rows):
             for j in range(self.cols):
-                self.grid.append(Cell(i, j, self.size))
+                self.grid.append(Cell(i, j, self.size, self.rows))
         self.addBeginEnd()
     '''adds a beginning and a end'''
     def addBeginEnd(self):
@@ -69,7 +70,7 @@ class Maze():
             current_cell.walls['right'] = False
             next_cell.walls['left'] = False
     '''updates current cell'''
-    def updates_grid(self, dt): 
+    def updates_grid(self): 
         next_cell, way = self.find_next_cell(self.current_cell)
         if next_cell is not None:
             Cell.changeStatus(self.current_cell.status, 'visited', 'current', 'in_stack')
@@ -84,5 +85,5 @@ class Maze():
             self.current_cell = next_cell
             Cell.changeStatus(self.current_cell.status, 'in_stack', 'current')
         else:
-            #Cell.changeStatus(self.current_cell.status, 'current')
+            self.finished = True
             self.current_cell.status['current'] = False              
