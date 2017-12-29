@@ -73,6 +73,7 @@ class Miner():
     def mutate(self, mutationRate):
         if random() <= mutationRate and self.fitness() < 1:
             self.path = self.path[0:self.path_idx+1]
+    '''i dont like this here but i got error putting in dna'''
     @staticmethod
     def crossover(father, mother):
         bpath = []
