@@ -1,5 +1,6 @@
 import string
 import random
+from rStr import mutatesChar
 class DNA():
     '''initiates the object'''
     def __init__(self, goal, value, mutationRate):
@@ -17,7 +18,4 @@ class DNA():
     def mutates(self):            
         for i in range(len(self.value)):
             if random.randint(1, 100) <= self.mutationRate*100:
-                self.value[i] = self.mutatesChar()
-    '''return random char'''
-    def mutatesChar(self, chars=string.ascii_letters+' '):
-        return random.choice(chars)
+                self.value[i] = mutatesChar()

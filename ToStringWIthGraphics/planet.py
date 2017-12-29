@@ -1,21 +1,16 @@
 import string
 import random
+from rStr import strArr, strGenerator
 from genes import DNA
 class Population():
     def __init__(self, goal, size_pop = 200, mutationRate = 0.01):
-        self.goal = self.strArr(goal)
+        self.goal = strArr(goal)
         self.size_pop = size_pop
         self.goal_size = len(self.goal)
         self.mutationRate = mutationRate
-    '''creates the list from the text'''
-    def strArr(self, string):
-        return [char for char in string]
-    '''generate a random string'''
-    def strGenerator(self, size, chars=string.ascii_letters+' '):
-        return [random.choice(chars) for _ in range(size)]
     '''Creates an element of the population, now its DNA'''
     def make_member(self):
-        value = self.strGenerator(size=self.goal_size)
+        value = strGenerator(size=self.goal_size)
         return DNA(self.goal, value, self.mutationRate)
     '''creates the population'''
     def make_population(self):
