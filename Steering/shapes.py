@@ -3,15 +3,15 @@ from pyglet.gl import *
 from numpy import pi, sin, cos, linspace
 
 def triangle(x, y, size, angle = 0, color=(255, 255, 255, 150)):
-    glPushMatrix()
-    glTranslatef(x + size/2, y + size/3, 0.0)
-    glRotatef(angle, 0, 0, 1)
-    glTranslatef(-x - size/2, -y - size/3, 0.)
+    # glPushMatrix()
+    # glTranslatef(x + size/2, y + size/3, 0.0)
+    # glRotatef(angle, 0, 0, 1)
+    # glTranslatef(-x - size/2, -y - size/3, 0.)
     pyglet.graphics.draw(3, pyglet.gl.GL_TRIANGLES,
             ('v2f', (x, y, x+size, y, x+size/2, y+size*1.4)),
             ('c4B', color*3))
 
-    glPopMatrix()
+    # glPopMatrix()
 
 def circle(x, y, radius, color=(255, 0, 0)):
     iterations = int(2*radius*pi)
@@ -35,3 +35,10 @@ def ring(x, y, radius, color=(255,0,0)):
         glVertex2f(dx, dy)
     glEnd()
 
+def line(x, y, length, color=(0, 0, 0)):
+    glColor4f(color[0]/255, color[1]/255, color[2]/255, 1.0)
+    # glLineWidth(4)
+    glBegin(GL_LINE_STRIP)
+    glVertex2f(x, y)
+    glVertex2f(x, y+length*20)
+    glEnd()
