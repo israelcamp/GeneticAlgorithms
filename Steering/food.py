@@ -1,10 +1,11 @@
 import numpy as np
+from numpy.random import randint 
 import shapes
 
 class Food():
-    def __init__(self, goodness=1):
-        self.pos = np.random.randint(low=0, high=600, size=2).astype('float32')
-        self.size = 10
+    def __init__(self, goodness):
+        self.pos = np.array([randint(0, 1000), randint(0, 600)])
+        self.size = 6
         self.goodness = goodness
     def show(self):
         if self.goodness == 1:
