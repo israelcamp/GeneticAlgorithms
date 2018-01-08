@@ -15,3 +15,7 @@ Added different weights of attraction for food and poison. Can move to evolution
 07/01/2018
 
 Made some overall improvements and added some interaction. Also, added evolution. Next I will try to insert predators.
+
+08/01/2018
+
+Added predator to the world.
