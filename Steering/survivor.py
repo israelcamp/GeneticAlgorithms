@@ -11,7 +11,7 @@ class InfPos():
         self.pos = np.array([10000., 10000.])
         self.goodness = 1
 class Survivor():
-    maxspeed = 5
+    maxspeed = 7.
     maxforce = 0.3
     xp = [10., 5., 0.]
     fp = [255., 130., 0.]
@@ -23,17 +23,17 @@ class Survivor():
         self.size = 15
         self.health = 10.
         if perception is None:
-            self.perception = np.random.randint(low=15, high=120, size=2)
+            self.perception = np.random.randint(low=15, high=120, size=3)
         else:
             self.perception = perception
             if random() < 0.01:
-                self.perception += np.random.randint(-10, 10)
+                self.perception += np.random.randint(-10, 10, size=3)
         if atraction is None:
-            self.atraction = 6 * np.random.rand(2) - 3
+            self.atraction = 6 * np.random.rand(3) - 3
         else:
             self.atraction = atraction
             if random() < 0.01:
-                self.atraction += 0.6 * np.random.rand(2) - 0.3
+                self.atraction += 0.6 * np.random.rand(3) - 0.3
     '''mostra o survivor'''
     def show(self):
         alpha = int(self.f(self.health))
@@ -45,9 +45,16 @@ class Survivor():
         shapes.triangle(self.pos[0]-2, self.pos[1]-2, self.size, angle=angle, color=(0, 0, 0, alpha))
         shapes.ring(self.pos[0]+self.size/2, self.pos[1]+self.size/3, self.perception[0], color=(100, 255, 0))
         shapes.ring(self.pos[0]+self.size/2, self.pos[1]+self.size/3, self.perception[1], color=(255, 100, 0))
+        shapes.ring(self.pos[0]+self.size/2, self.pos[1]+self.size/3, self.perception[2], color=(255, 255, 0))
         shapes.line(self.pos[0]+self.size/3, self.pos[1]+self.size/3, self.atraction[0], color=(100, 255, 0))
         shapes.line(self.pos[0]+self.size/3, self.pos[1]+self.size/3, self.atraction[1], color=(255, 100, 0))
+        shapes.line(self.pos[0]+self.size/3, self.pos[1]+self.size/3, self.atraction[2], color=(255, 255, 0))
         glPopMatrix()
+
+    '''runs from predator'''
+    def run(self, predator):
+        if norm(self.pos - predator.pos) < self.perception[2]:
+            self.seek(predator.pos, self.atraction[2])
     '''define o alvo a ser buscado'''
     def hunting(self, dinner, venom):
         if len(dinner) > 0:
@@ -56,7 +63,7 @@ class Survivor():
             if target_food is not None:
                 self.eat(target_food, self.atraction[0], 1.0, dinner)
             if target_poison is not None:
-                self.eat(target_poison, self.atraction[1], -1.5, venom)
+                self.eat(target_poison, self.atraction[1], -2.0, venom)
     '''come a Food, se nao move em direcao'''
     def eat(self, target, target_atraction, health, elements):
         if norm(target.pos - self.pos) < self.maxspeed:
@@ -78,9 +85,9 @@ class Survivor():
     def seek(self, target_pos, target_atraction):
         desired = target_pos - self.pos
         desired = algelin.setMag(desired, self.maxspeed)
-        steer = (desired - self.vel)*target_atraction
+        steer = desired - self.vel
         steer = algelin.limit(steer, self.maxforce)
-        self.applyFoce(steer)
+        self.applyFoce(steer*target_atraction)
     '''aplica a forca ao survivor'''
     def applyFoce(self, force):
         self.acc += force

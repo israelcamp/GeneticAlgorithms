@@ -11,5 +11,5 @@ def limit(vector, lim):
     else:
         return vector
 '''calcula angulo de rotacao do vetor'''
-def heading(vector):
-    return math.degrees(math.atan2(vector[1], vector[0]) + 3*math.pi/2)
+def heading(vector, add_radians=3*math.pi/2):
+    return math.degrees(math.atan2(vector[1], vector[0]) + add_radians)
