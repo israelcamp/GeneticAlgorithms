@@ -18,8 +18,6 @@ dinner = [Food(1) for _ in range(30)]
 venom = [Food(-1) for _ in range(10)]
 p = Population(10)
 p.makePopulation()
-def makeClone(dt):
-    p.makeClones()
 def addPoision(dt):
     if len(venom) < 10:
         venom.append(Food(-1))
