@@ -7,9 +7,10 @@ class Population():
         self.maxpop = maxpop
     def makePopulation(self):
         self.pop = [Survivor() for _ in range(self.maxpop)]
-    def popSeek(self, dinner, venom):
+    def popSeek(self, dinner, venom, predator):
         for surv in self.pop:
             surv.hunting(dinner, venom)
+            surv.run(predator)
     def addSurvivor(self):
         self.pop.append(Survivor())
     def show(self):

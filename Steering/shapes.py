@@ -38,3 +38,13 @@ def line(x, y, length, color=(0, 0, 0)):
     glVertex2f(x, y)
     glVertex2f(x, y+length*20)
     glEnd()
+
+def pacman(x, y, radius, color=(255, 255, 0, 255)):
+    glColor4f(color[0]/255, color[1]/255, color[2]/255, color[3]/255)
+    glBegin(GL_POLYGON)
+    glVertex2f(x, y)
+    for i in linspace(0.15, 1.85, num=30):
+        dx = x + radius*cos(i*pi)
+        dy = y + radius*sin(i*pi)
+        glVertex2f(dx, dy)
+    glEnd()
