@@ -6,10 +6,18 @@ from planet import Population
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-goal')
+parser.add_argument('-mutRate', type=int)
+parser.add_argument('-pop', type=int)
 args = parser.parse_args()
 goal = args.goal
+size_pop = args.pop
+mutationRate = args.mutRate
 if goal is None:
 	goal = 'Natalia Goska'
+if size_pop is None:
+    size_pop = 200
+if mutationRate is None:
+    mutationRate = 0.01
 
 window = pyglet.window.Window(width=600, height=400, resizable=True, caption='Genetic Algorithm, Goal: '+goal)
 class Message():
@@ -46,7 +54,7 @@ class God():
             self.msg_fitness.update_msg(str(self.best_member.fitness()))
             self.msg_gen.update_msg(str(self.count_gen))
             
-g = God(goal, size_pop=200, mutationRate=0.01)
+g = God(goal, size_pop=size_pop, mutationRate=mutationRate)
 
 msg_info1 = Message(texto='Best Fitness:', font_size=20, xOff=-200, yOff=-150, color=(0,191,255,255))
 msg_info2 = Message(texto='Number of Generations:', font_size=20, xOff=-145, yOff=-100, color=(0,191,255,255))
