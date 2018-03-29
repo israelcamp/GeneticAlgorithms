@@ -8,6 +8,6 @@ Added with graphics using pyglet.
 
 Here are the results for the code, given the the goal string a population of 600 members.
 
-![picture](ToStringWithGraphics/screenshots/initial.png "Beginning of the evolution")
+![picture](screenshots/initial.png)
 
-![picture](ToStringWithGraphics/screenshots/end.png "End of evolution")
+![picture](screenshots/end.png)
