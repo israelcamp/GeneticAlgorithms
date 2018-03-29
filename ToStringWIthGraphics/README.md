@@ -2,12 +2,12 @@ I just did the same with strings, but now I have a canvas that display the membe
 
 Next I will add more things to the canvas.
 
-# Update - 24.14.17
+### Update - 24.14.17
 
 Added with graphics using pyglet.
 
 Here are the results for the code, given the the goal string a population of 600 members.
 
-![picture](screenshots/initial.png)
+![picture](img/initial.png)
 
-![picture](screenshots/end.png)
+![picture](img/end.png)
