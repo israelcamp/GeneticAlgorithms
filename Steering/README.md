@@ -1,21 +1,19 @@
 # Steering Agents
 
-01/01/2018
+### 01/01/2018 - Branch follow-mouse contais code for a vehicle that follows the mouse cursor.
+![steering_one](https://user-images.githubusercontent.com/34630228/38139388-931a9c4c-3405-11e8-92e5-0631d3ca9b64.png)
 
-Branch follow-mouse contais code for a vehicle that follows the mouse cursor.
-
-06/01/2018
+### 06/01/2018
 
 Added perception to steering agents, although its not the way i wanted it to be. So i will have to change.
 
-06/01/2018
+### 06/01/2018
 
 Added different weights of attraction for food and poison. Can move to evolutionary step now.
 
-07/01/2018
+### 07/01/2018
 
 Made some overall improvements and added some interaction. Also, added evolution. Next I will try to insert predators.
 
-08/01/2018
-
-Added predator to the world.
+### 08/01/2018 - Added predator to the world.
+![predator](https://user-images.githubusercontent.com/34630228/38139387-92f4f690-3405-11e8-82ec-20d9983b2707.png)
