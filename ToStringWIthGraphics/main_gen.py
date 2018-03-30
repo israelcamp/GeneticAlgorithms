@@ -5,9 +5,9 @@ import argparse
 from planet import Population
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-goal')
-parser.add_argument('-mutRate', type=int)
-parser.add_argument('-pop', type=int)
+parser.add_argument('-goal', help='Set in this the string that you want to evolve to')
+parser.add_argument('-mutRate', type=int, help='Set in this the mutation rate for the population')
+parser.add_argument('-pop', type=int, help='Set in this the number of members per population')
 args = parser.parse_args()
 goal = args.goal
 size_pop = args.pop
