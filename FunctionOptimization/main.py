@@ -1,5 +1,4 @@
 import numpy as np
-# from solver import Solver
 from population import Population
 
 def funcao(x):
