@@ -7,4 +7,7 @@ The GA takes as input the function to be minimized, the number of members per po
 
 The mating pool is created by tournament selection. For every member in a population another random one is selected, their fitness are evaluated (value of the function) and the one with the least value in put in the mating pool. Then, from the mating pool we select two random members to produce a child, new member for the new population.
 
+### Example
+Here I minimize f(x,y,z) = x^2 + y^2 + z^2
+
 ![screenshotfrom2018-04-0710-04-30](https://user-images.githubusercontent.com/34630228/38455323-e416b386-3a4c-11e8-96ba-abee87720d76.png)
