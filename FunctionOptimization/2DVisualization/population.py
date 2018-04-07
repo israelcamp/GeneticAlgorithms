@@ -89,9 +89,6 @@ class Population():
 
 
     def FindOptimalPop(self, dt):
-        # self.previous_max_fit = 0
-        # self.number_gen_btw = 0
-        # self.count_gen = 0
         if self._Evolving() and self._Changing(self.previous_max_fit, self.number_gen_btw) < 200:
             max_fit, best_member = self.MaxFitness()
             if self.number_gen_btw == 0:
