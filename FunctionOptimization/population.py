@@ -3,11 +3,10 @@ from random import choice
 # from solver import Solver
 from dna import DNA
 class Population():
-    def __init__(self, pop_size, mutation_rate, func=None, upper_bound_vector=None, lower_bound_vector=None, opt='Min'):
+    def __init__(self, pop_size, mutation_rate, func=None, upper_bound_vector=None, lower_bound_vector=None):
         self.pop_size, self.mutation_rate = pop_size, mutation_rate
         self.func = func
         self.upper_bound, self.lower_bound = upper_bound_vector, lower_bound_vector
-        self.opt = opt
         self._CreatesPop()
 
     #creates the population
@@ -22,7 +21,7 @@ class Population():
             mother = choice(self.members)
             if mother != father:
                 break
-        if father.Fitness() < mother.Fitness():
+        if father.Fitness() > mother.Fitness():
             return father
         return mother
 
@@ -51,20 +50,15 @@ class Population():
     #calculates the maximum fitness and the best member
     def MaxFitness(self):
         #for minimizing
-        max_fit = 10000000
+        max_fit = -1000000
         for solver in self.members:
-            if solver.Fitness() < max_fit:
+            if solver.Fitness() > max_fit:
                 max_fit = solver.Fitness()
                 best_member = solver
         return max_fit, best_member
 
     def _TotalFitness(self):
         return sum([solver.Fitness() for solver in self.members])
-
-    # def _CheckAndMutation(self):
-    #     for solver in self.members:
-    #         solver.Muatation()
-    #         # solver.KeepInRange()
 
     #checks if the population still has room to improve by some factor E
     def _Evolving(self):
