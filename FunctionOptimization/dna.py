@@ -2,7 +2,8 @@ import numpy as np
 from random import random, randint, choice
 
 class DNA():
-    def __init__(self, func, new_genes=True, **kwargs):
+    def __init__(self, func, **kwargs):
+        self.genes = None
         for key, value in kwargs.items():
             if key == 'size':
                 self.size = value
@@ -12,25 +13,18 @@ class DNA():
                 self.lower_bound = value
             if key == 'genes':
                 self.genes = value
-                new_genes = False
-        if new_genes:
+        if self.genes is None:
             self._CreatesGenes()
         self.func = func
 
     def _CreatesGenes(self):
         self.genes = np.array([self._RandomU(self.upper_bound[i], self.lower_bound[i]) for i in range(self.size)])
-        # print(self.genes)
 
     def _RandomU(self, sup, inf):
         return (sup - inf) * random() + inf
     
     def Fitness(self):
         return self.func(self.genes)
-
-    # def KeepInRange(self):
-    #     for i in range(self.size):
-    #         if self.genes[i] > self.upper_bound[i] or self.genes[i] < self.lower_bound[i]:
-    #             self.genes[i] = self._RandomU(self.upper_bound[i], self.lower_bound[i])
 
     def Mutation(self, mutation_rate):
         for i in range(len(self.genes)):
