@@ -6,15 +6,13 @@ from population import Population
 import shapes
 
 def funcao(x):
-	return sum(x**2)
-	# return abs(sum(x))
+	return -sum(x**2)
 
 optimal = [0, 0]
 
 dim = 600
 delta = 10
 pop = Population(pop_size=1000, mutation_rate=0.01, func=funcao, upper_bound_vector=[10., 10.], lower_bound_vector=[-10., -10.0], delta=(dim/2, dim/delta))
-# pop.EvolvePop()
 
 #creates window
 window = pyglet.window.Window(dim, dim, caption='GA Function Optimization', resizable=True)

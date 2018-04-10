@@ -1,9 +1,9 @@
 import numpy as np 
 from random import choice
-# from solver import Solver
 from dna import DNA
+
 class Population():
-    def __init__(self, pop_size, mutation_rate, delta, func=None, upper_bound_vector=None, lower_bound_vector=None, opt='Min'):
+    def __init__(self, pop_size, mutation_rate, delta, func=None, upper_bound_vector=None, lower_bound_vector=None):
         self.pop_size, self.mutation_rate = pop_size, mutation_rate
         self.func = func
         self.upper_bound, self.lower_bound = upper_bound_vector, lower_bound_vector
@@ -12,7 +12,7 @@ class Population():
         self.count_gen = 0
         self.previous_max_fit = 0
         self.number_gen_btw = 0
-        self.print = False
+        self.end, self.print = False, True
 
     #creates the population
     def _CreatesPop(self):
@@ -26,7 +26,7 @@ class Population():
             mother = choice(self.members)
             if mother != father:
                 break
-        if father.Fitness() < mother.Fitness():
+        if father.Fitness() > mother.Fitness():
             return father
         return mother
 
@@ -55,9 +55,9 @@ class Population():
     #calculates the maximum fitness and the best member
     def MaxFitness(self):
         #for minimizing
-        max_fit = 10000000
+        max_fit = -10000000
         for solver in self.members:
-            if solver.Fitness() < max_fit:
+            if solver.Fitness() > max_fit:
                 max_fit = solver.Fitness()
                 best_member = solver
         return max_fit, best_member
@@ -70,9 +70,7 @@ class Population():
         max_fit, _ = self.MaxFitness()
         E = 0.005
         soma = sum([abs(solver.Fitness() - max_fit) for solver in self.members])/self.pop_size
-        if soma < E:
-            return False
-        return True
+        return soma > E
 
     #check if the best value is changing for some  generations
     def _Changing(self, previous_max_fit, number_gen_btw):
@@ -87,23 +85,23 @@ class Population():
     def EvolvePop(self):
         self.members = self._NewPop()
 
-
     def FindOptimalPop(self, dt):
-        if self._Evolving() and self._Changing(self.previous_max_fit, self.number_gen_btw) < 200:
-            max_fit, best_member = self.MaxFitness()
-            if self.number_gen_btw == 0:
-                print("Function Evaluation: {} -- Point {} -- Gen {}".format(max_fit, best_member.genes, self.count_gen))
-            self.members = self._NewPop()
+        if self._Evolving() and self._Changing(self.previous_max_fit, self.number_gen_btw) < 100:
+            self.EvolvePop()
             self.count_gen += 1
-        elif not self.print:
-            print("---FIM---")
-            max_fit, best_member = self.MaxFitness()
-            print("Function Evaluation: {} -- Point {}-- Gen {}".format(max_fit, best_member.genes, self.count_gen))
-            self.print = True
+        else:
+            self.end = True
+
     def show(self):
-        max_fit, best_member = self.MaxFitness()
-        best_member.best = True
         for solver in self.members:
             solver.show(self.delta)
+        max_fit, best_member = self.MaxFitness()
+        if not self.end:
+            best_member.best = True
+            if self.number_gen_btw == 0:
+                print("Function Evaluation: {} -- Point {} -- Gen {}".format(max_fit, best_member.genes, self.count_gen))
+        if self.end and self.print:
+            print("---FIM---")
+            print("Function Evaluation: {} -- Point {}-- Gen {}".format(max_fit, best_member.genes, self.count_gen))
+            self.print = False
         best_member.show(self.delta)
-        # print(max_fit)
