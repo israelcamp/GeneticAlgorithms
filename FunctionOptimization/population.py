@@ -1,7 +1,7 @@
 import numpy as np 
 from random import choice
-# from solver import Solver
 from dna import DNA
+
 class Population():
     def __init__(self, pop_size, mutation_rate, func=None, upper_bound_vector=None, lower_bound_vector=None):
         self.pop_size, self.mutation_rate = pop_size, mutation_rate
@@ -65,9 +65,7 @@ class Population():
         max_fit, _ = self.MaxFitness()
         E = 0.005
         soma = sum([abs(solver.Fitness() - max_fit) for solver in self.members])/self.pop_size
-        if soma < E:
-            return False
-        return True
+        return soma > E
 
     #check if the best value is changing for some  generations
     def _Changing(self, previous_max_fit, number_gen_btw):
