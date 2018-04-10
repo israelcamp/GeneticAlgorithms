@@ -11,3 +11,7 @@ The mating pool is created by tournament selection. For every member in a popula
 Here I minimize f(x,y,z) = x^2 + y^2 + z^2
 
 ![screenshotfrom2018-04-0710-04-30](https://user-images.githubusercontent.com/34630228/38455323-e416b386-3a4c-11e8-96ba-abee87720d76.png)
+
+### Update 9.04.18
+
+Code changed so that the codes performs maximization of fitness function, staying in the commom sense for GA. The function above can still be minimized, just multiply it by minus one.
