@@ -9,7 +9,6 @@ def triangle(x, y, size, angle = 0, color=(255, 255, 255, 150)):
     glVertex2f(x + size/2, y + size*1.4)
     glEnd()
 
-
 def circle(x, y, radius, color=(255, 0, 0)):
     iterations = int(2*radius*pi)
     s = sin(2*pi / iterations)
@@ -21,32 +20,6 @@ def circle(x, y, radius, color=(255, 0, 0)):
     for i in range(iterations+1):
         glVertex2f(x+dx, y+dy)
         dx, dy = (dx*c - dy*s), (dy*c + dx*s)
-    glEnd()
-
-def ring(x, y, radius, color=(255,0,0)):
-    glColor4f(color[0]/255, color[1]/255, color[2]/255, 1.0)
-    glBegin(GL_LINE_STRIP)
-    for i in linspace(0.0, 2.0, num=50):
-        dx = x + radius*cos(i*pi)
-        dy = y + radius*sin(i*pi)
-        glVertex2f(dx, dy)
-    glEnd()
-
-def line(x, y, length, color=(0, 0, 0)):
-    glColor4f(color[0]/255, color[1]/255, color[2]/255, 1.0)
-    glBegin(GL_LINE_STRIP)
-    glVertex2f(x, y)
-    glVertex2f(x, y+length*20)
-    glEnd()
-
-def pacman(x, y, radius, color=(255, 255, 0, 255)):
-    glColor4f(color[0]/255, color[1]/255, color[2]/255, color[3]/255)
-    glBegin(GL_POLYGON)
-    glVertex2f(x, y)
-    for i in linspace(0.15, 1.85, num=30):
-        dx = x + radius*cos(i*pi)
-        dy = y + radius*sin(i*pi)
-        glVertex2f(dx, dy)
     glEnd()
 
 def cartesian(wband, wheight, delta):
@@ -81,7 +54,6 @@ def grid(wband, wheight, delta):
     horizontal_lines = int(wband/delta)
     glPushMatrix()
     glLineWidth(1)
-    # glColor4f(0, 0, 0, 0.2)
     #add the vertical lines
     for i in range(vertical_lines-1):
         glBegin(GL_LINES)
