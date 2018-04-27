@@ -10,10 +10,12 @@ class FBGame():
         """Class that controls the Flappy Bird Pacman."""
         self.game_dict = kwargs
         if first:
+            self.count_generations = 1
             self.highest_score = 0
             self._create_birds_population(**kwargs)
         self.pipes_pop = self._create_pipes_population(**kwargs)
         self.height, self.width, self.pipe_size = kwargs['window_height'], kwargs['window_width'], kwargs['pipe_size']
+        self.count_alive = kwargs['birds_pop_size']
 
     def update(self, dt):
         """Updates the state of the game, updates bird and pipes."""
@@ -23,12 +25,14 @@ class FBGame():
         if self.all_dead:
             self.birds_pop = deque(make_new_gen(self.birds_pop)) #creates new population of birds
             self.reset()  #resets pipes position
+            self.count_alive = self.game_dict['birds_pop_size'] #resetes counting
+            self.count_generations += 1
         self._updates_pipes_pop() #updates pipes positions
         
     def show(self):
         """Shows the bird and the pipes."""
         for bird in self.birds_pop:
-            if not bird.lost:
+            if not bird.lost and bird.y - bird.radius < self.height and bird.y + bird.radius > 0:
                 bird.show()
         for pipe in self.pipes_pop:
             pipe.show()
@@ -42,8 +46,9 @@ class FBGame():
         """Updates the birds y position"""
         for bird in self.birds_pop:
             #checks if the birds hit one of the pipes
-            if bird.hits(self.pipes_pop[0]):
+            if bird.hits(self.pipes_pop[0]) and not bird.lost:
                 bird.lost = True
+                self.count_alive -= 1
             if not bird.lost:
                 self.all_dead = False
                 bird.increase_score()
@@ -86,7 +91,10 @@ class FBGame():
                                   anchor_x='left', anchor_y='bottom').draw()
         pyglet.text.Label('Highest Score Ever: {}'.format(self.highest_score),font_name='Times New Roman',font_size=20,x=0, y=25, color=(0,255,0,255),
                                   anchor_x='left', anchor_y='bottom').draw()
-
+        pyglet.text.Label('Pacmans Alive: {}'.format(self.count_alive),font_name='Times New Roman',font_size=20,x=0, y=75, color=(0,0,255,255),
+                                  anchor_x='left', anchor_y='bottom').draw()
+        pyglet.text.Label('Number of Generations: {}'.format(self.count_generations),font_name='Times New Roman',font_size=20,x=0, y=50, color=(255,0,255,255),
+                                  anchor_x='left', anchor_y='bottom').draw()                                  
 
     def _game_over(self):
         """Draws the Game Over message."""
