@@ -4,3 +4,7 @@
 
 I use the code for the Flappy Bird game from before together with the neuroevolution code plus some things to make some pacmans that
 learn how to play the game and win!
+
+## Updates
+
+* 27.04.2018 - Some new info are printed to the screen. - Number of generations and number of alive pacmans.
