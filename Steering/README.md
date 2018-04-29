@@ -17,3 +17,6 @@ Made some overall improvements and added some interaction. Also, added evolution
 
 ### 08/01/2018 - Added predator to the world.
 ![predator](https://user-images.githubusercontent.com/34630228/38139387-92f4f690-3405-11e8-82ec-20d9983b2707.png)
+
+### 29/04/2018 - Added some changes to the code without predator.
+![screenshotfrom2018-04-2912-27-21](https://user-images.githubusercontent.com/34630228/39408193-2eceb154-4ba9-11e8-8155-ea734a2a5d55.png)
