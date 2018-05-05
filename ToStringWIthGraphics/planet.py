@@ -8,29 +8,34 @@ class Population():
         self.size_pop = size_pop
         self.goal_size = len(self.goal)
         self.mutationRate = mutationRate
-    '''Creates an element of the population, now its DNA'''
+
     def make_member(self):
+        '''Creates an element of the population, now its DNA'''
         value = strGenerator(size=self.goal_size)
         return DNA(self.goal, value, self.mutationRate)
-    '''creates the population'''
+    
     def make_population(self):
+        '''Creates the population'''
         return [self.make_member() for _ in range(self.size_pop)]
-    '''picks a parent with accept and reject'''
+    
     def pickParent(self, pop, max_fitness):
+        '''Picks a parent with accept and reject'''
         while True:
             parent = random.choice(pop)
             prob_parent = parent.fitness()/max_fitness
             if random.random() <= prob_parent:
                 return parent
-    '''calcultes maximum fitness for given population'''
+    
     def calc_max_fitness(self, pop):
+        '''Calcultes maximum fitness for given population'''
         best_member = pop[0]
         for member in pop:
             if member.fitness() > best_member.fitness():
                 best_member = member
         return best_member
-    '''creates new population'''
+    
     def make_new_population(self, pop, max_fitness):
+        '''Creates new population'''
         new_pop = []
         for i in range(len(pop)):
             father = self.pickParent(pop, max_fitness)
@@ -39,8 +44,9 @@ class Population():
             child.mutates()
             new_pop.append(child)
         return new_pop
-    '''evolves to the next generation'''
+    
     def one_step_evolve(self, pop):
+        '''Evolves to the next generation'''
         best_member = self.calc_max_fitness(pop)
         n_pop = self.make_new_population(pop, best_member.fitness())
         return n_pop, best_member
