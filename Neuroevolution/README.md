@@ -3,7 +3,7 @@
 In this code I implement the [Ripley's Dataset](http://www.stats.ox.ac.uk/pub/PRNN/) to be solved using Neuroevolution,
 a combination of Genetic Algorithms and Neural Networks.
 
-The population contains 20 NNs with 20 hidden layers each. The mutation rate is 10% and I let them evolve for 800 generations.
+The population contains 20 NNs with 20 hidden nodes in the hidden layer. The mutation rate is 10% and I let them evolve for 800 generations.
 
 ![screenshot from 2018-04-02 08-31-46](https://user-images.githubusercontent.com/34630228/38194918-05459f40-3651-11e8-8677-7d3d4c027d22.png)
 
