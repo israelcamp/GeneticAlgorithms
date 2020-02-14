@@ -4,7 +4,7 @@ from game import FBGame
 
 window = Window(600, 800, caption='Flappy Bird', vsync=0.0)
 
-fps_display = pyglet.clock.ClockDisplay()
+fps_display = pyglet.clock.Clock()
 
 game_dict = {
     'bird_x': 80.,
@@ -18,6 +18,7 @@ game_dict = {
 }
 game = FBGame(first=True, **game_dict)
 
+
 @window.event
 def on_key_press(symbol, modifiers):
     if symbol is pyglet.window.key.W:
@@ -25,11 +26,14 @@ def on_key_press(symbol, modifiers):
         pass
     if symbol is pyglet.window.key.R:
         game.reset(first=True)
+
+
 @window.event
 def on_draw():
     window.clear()
     game.show()
     # fps_display.draw()
 
+
 pyglet.clock.schedule_interval(game.update, 1./120.)
-pyglet.app.run()    
+pyglet.app.run()
