@@ -2,25 +2,25 @@ import random
 import string
 
 class DNA():
-    '''initiates the object'''
     def __init__(self, goal, value, mutationRate):
+        '''initiates the object'''
         self.value = value 
         self.goal = goal
         self.mutationRate = mutationRate
-    '''calculates fitness'''
     def fitness(self):
+        '''calculates fitness'''
         fit = 0
         for i in range(len(self.goal)):
             if self.value[i] == self.goal[i]:
                 fit += 1
         return (fit/(len(self.goal)))**2
-    '''mutates'''
     def mutates(self):            
+        '''mutates'''
         for i in range(len(self.value)):
             if random.randint(1, 100) <= self.mutationRate*100:
                 self.value[i] = self.mutatesChar()
-    '''return random char'''
     def mutatesChar(self, chars=string.ascii_letters+' '):
+        '''return random char'''
         return random.choice(chars)
 
 class Population():
@@ -29,35 +29,35 @@ class Population():
         self.size_pop = size_pop
         self.goal_size = len(self.goal)
         self.mutationRate = mutationRate
-    '''creates the list from the text'''
     def strArr(self, string):
+        '''creates the list from the text'''
         return [char for char in string]
-    '''generate a random string'''
     def strGenerator(self, size, chars=string.ascii_letters+' '):
+        '''generate a random string'''
         return [random.choice(chars) for _ in range(size)]
-    '''Creates an element of the population, now its DNA'''
     def make_member(self):
+        '''Creates an element of the population, now its DNA'''
         value = self.strGenerator(size=self.goal_size)
         return DNA(self.goal, value, self.mutationRate)
-    '''creates the population'''
     def make_population(self):
+        '''creates the population'''
         return [self.make_member() for _ in range(self.size_pop)]
-    '''picks a parent with accept and reject'''
     def pickParent(self, pop, max_fitness):
+        '''picks a parent with accept and reject'''
         while True:
             parent = random.choice(pop)
             prob_parent = parent.fitness()/max_fitness
             if random.random() <= prob_parent:
                 return parent
-    '''calcultes maximum fitness for given population'''
     def calc_max_fitness(self, pop):
+        '''calcultes maximum fitness for given population'''
         best_member = pop[0]
         for member in pop:
             if member.fitness() > best_member.fitness():
                 best_member = member
         return best_member
-    '''creates new population'''
     def make_new_population(self, pop, max_fitness):
+        '''creates new population'''
         new_pop = []
         for i in range(len(pop)):
             father = self.pickParent(pop, max_fitness)
@@ -66,8 +66,8 @@ class Population():
             child.mutates()
             new_pop.append(child)
         return new_pop
-    '''evolve the populations towards the goal'''
     def evolve(self):
+        '''evolve the populations towards the goal'''
         count = 0
         pop = self.make_population()
         best_member = self.calc_max_fitness(pop)
@@ -78,6 +78,6 @@ class Population():
             print('Generation {}: {}'.format(count, ''.join(best_member.value)))
         return best_member
 
-goal = 'Natalia Goska'
+goal = 'Estamos aprendendo AG'
 planet = Population(goal, 200, 0.01)
 best = planet.evolve()

@@ -4,19 +4,13 @@ import argparse
 from planet import Population
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-goal', help='Set in this the string that you want to evolve to')
-parser.add_argument('-mutRate', type=int, help='Set in this the mutation rate for the population')
-parser.add_argument('-pop', type=int, help='Set in this the number of members per population')
+parser.add_argument('-goal', default="Curso de Matematica", help='Set in this the string that you want to evolve to')
+parser.add_argument('-mutRate', default=0.01, type=int, help='Set in this the mutation rate for the population')
+parser.add_argument('-pop', default=200, type=int, help='Set in this the number of members per population')
 args = parser.parse_args()
 goal = args.goal
 size_pop = args.pop
 mutationRate = args.mutRate
-if goal is None:
-	goal = 'Curso da Sandra'
-if size_pop is None:
-    size_pop = 200
-if mutationRate is None:
-    mutationRate = 0.01
 
 window = pyglet.window.Window(width=600, height=400, resizable=True, caption='Genetic Algorithm, Goal: '+goal)
 class Message(pyglet.text.Label):

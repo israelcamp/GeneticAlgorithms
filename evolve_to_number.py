@@ -13,23 +13,24 @@ from random import shuffle
     Next I will try to implement on text.
 '''
 class Item():
-    '''initiates the class object'''
     def __init__(self, goal, value):
+        '''initiates the class object'''
         self.value = value
         self.goal = goal
-    '''calculate the fitness'''
+
     def calc_fitness(self):
+        '''calculate the fitness'''
         #self.fitness = self.value/self.goal
         return self.value/self.goal
 
-'''Given two items from pop returns a baby'''
 def make_child(goal, father, mother):
+    '''Given two items from pop returns a baby'''   
     #make baby using the sum of the values from mather and father plus a minor mutation
     baby = Item(goal, father.value + mother.value + .01*np.random.rand())
     return baby
 
-'''Given a population returns its children'''
 def make_new_gen(size_pop, goal, pop):
+    '''Given a population returns its children'''
     #now we sum all the fitness using the exp to apply the softmax later
     exp_total_fitness = 0
     for item in pop:
