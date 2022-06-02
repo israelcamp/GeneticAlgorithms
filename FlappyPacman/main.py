@@ -2,7 +2,7 @@ from pyglet.window import Window
 import pyglet
 from game import FBGame
 
-window = Window(600, 800, caption='Flappy Bird', vsync=0.0)
+window = Window(600, 800, caption='Flappy Bird', vsync=0.0, resizable=True)
 
 fps_display = pyglet.clock.Clock()
 

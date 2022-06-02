@@ -68,3 +68,10 @@ def grid(wband, wheight, delta):
         glEnd()    
     glPopMatrix()
 
+def line(x0, y0, x1, y1, color):
+    glColor4f(color[0]/255, color[1]/255, color[2]/255, color[3]/255)
+    glLineWidth(5)
+    glBegin(GL_LINES)
+    glVertex2f(x0, y0)
+    glVertex2f(x1, y1)
+    glEnd()

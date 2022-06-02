@@ -16,7 +16,7 @@ class Population():
 
     #creates the population
     def _CreatesPop(self):
-        self.members = [DNA(func=self.func, upper_bound_vector=self.upper_bound, lower_bound_vector=self.lower_bound, size=len(self.upper_bound))
+        self.members = [DNA(func=self.func, upper_bound_vector=self.upper_bound, lower_bound_vector=self.lower_bound, size=len(self.upper_bound), delta=self.delta)
                         for _ in range(self.pop_size)]
 
     #performs tournament selection with 2 parents
@@ -82,7 +82,7 @@ class Population():
             self.number_gen_btw += 1
         return self.number_gen_btw
 
-    def EvolvePop(self):
+    def EvolvePop(self, *args, **kwargs):
         self.members = self._NewPop()
 
     def FindOptimalPop(self, dt):
@@ -99,9 +99,9 @@ class Population():
         if not self.end:
             best_member.best = True
             if self.number_gen_btw == 0:
-                print("Function Evaluation: {} -- Point {} -- Gen {}".format(max_fit, best_member.genes, self.count_gen))
+                print("Function Evaluation: {} -- Point {} -- Gen {}".format(self.func(best_member.genes), best_member.genes, self.count_gen))
         if self.end and self.print:
             print("---FIM---")
-            print("Function Evaluation: {} -- Point {}-- Gen {}".format(max_fit, best_member.genes, self.count_gen))
+            print("Function Evaluation: {} -- Point {}-- Gen {}".format(self.func(best_member.genes), best_member.genes, self.count_gen))
             self.print = False
         best_member.show(self.delta)

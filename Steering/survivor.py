@@ -43,15 +43,15 @@ class Survivor():
             self.perception = np.random.randint(low=15, high=120, size=2)
         else:
             self.perception = perception
-            if random() < 0.1:
-                self.perception += np.random.randint(-10, 10, size=2)
+            if random() < 0.5:
+                self.perception += np.random.randint(-15, 15, size=2)
         if atraction is None:
             self.atraction = 6 * np.random.rand(2) - 3
         else:
             self.atraction = atraction
-            if random() < 0.1:
-                self.atraction += 0.6 * np.random.rand(2) - 0.3
-        self.label = Label(text='0', font_size=12, x=self.pos[0]+self.size, y=self.pos[1]++self.size, color=(0,0,0,255))
+            if random() < 0.5:
+                self.atraction += 1 * np.random.rand(2)
+        self.label = Label(text='0', font_size=12, x=self.pos[0]+self.size, y=self.pos[1]+self.size, color=(0,0,0,255))
 
     @property
     def score(self):
@@ -107,6 +107,7 @@ class Survivor():
                 target = food
         if not isinstance(target, InfPos):            
             return target
+            
     def seek(self, target_pos, target_atraction):
         '''Moves towards or away from the target depending on the atraction.'''
         desired = target_pos - self.pos
